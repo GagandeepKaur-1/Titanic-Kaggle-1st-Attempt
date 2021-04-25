@@ -1,0 +1,381 @@
+import os
+os.getcwd()
+
+os.chdir("C:\\Users\\Gagandeep\\Dropbox\\Titanic\\titanic\\")
+
+import numpy as np
+import pandas as pd
+
+train=pd.read_csv("train.csv")
+
+test=pd.read_csv("test.csv")
+
+train.isnull().sum()
+
+train.head()
+
+train.shape
+
+test.isnull().sum()
+
+miss_mean_age=train.loc[train["Name"].str.contains("Miss")].Age.mean(skipna=True)
+mr_mean_age=train.loc[train["Name"].str.contains("Mr")].Age.mean(skipna=True)
+Master_mean_age=train.loc[train["Name"].str.contains("Master")].Age.mean(skipna=True)
+mrs_mean_age=train.loc[train["Name"].str.contains("Mrs")].Age.mean(skipna=True)
+
+a=train["Name"].str.contains("Mr") & train["Age"].isnull()
+a=mr_mean_age
+mr_mean_age_cols=np.where(train.Name.str.contains("Mr.") & train["Age"].isnull())
+for row in mr_mean_age_cols:
+    train.iloc[row] = train.iloc[row].fillna(mr_mean_age)
+b=train["Name"].str.contains("Miss") & train["Age"].isnull()
+b=miss_mean_age
+miss_mean_age_cols=np.where(train.Name.str.contains("Miss.") & train["Age"].isnull())
+for row in miss_mean_age_cols:
+    train.iloc[row] = train.iloc[row].fillna(miss_mean_age)
+c=train["Name"].str.contains("Master") & train["Age"].isnull()
+c=Master_mean_age
+master_mean_age_cols=np.where(train.Name.str.contains("Master") & train["Age"].isnull())
+for row in master_mean_age_cols:
+    train.iloc[row] = train.iloc[row].fillna(Master_mean_age)
+d=train["Name"].str.contains("Mrs") & train["Age"].isnull()
+d=mrs_mean_age
+mrs_mean_age_cols=np.where(train.Name.str.contains("Mrs") & train["Age"].isnull())
+for row in mrs_mean_age_cols:
+    train.iloc[row] = train.iloc[row].fillna(mrs_mean_age)
+
+                                
+#mr_cols_test = np.where(X_test.Age.isnull() & X_test.Name.str.contains("Mr."))
+#mrs_cols_test = np.where(X_test.Age.isnull() & X_test.Name.str.contains("Mrs. "))
+#master_cols_test = np.where(X_test.Age.isnull() & X_test.Name.str.contains("Master."))
+#miss_cols_test = np.where(X_test.Age.isnull() & X_test.Name.str.contains("Miss."))
+
+#for row in mr_cols_test:
+ #   X_test.iloc[row] = X_test.iloc[row].fillna(mr_mean_age_test)
+
+print(mr_mean_age)
+print(miss_mean_age)
+print(mrs_mean_age)       
+print(Master_mean_age)
+#idx = df['sales'].isnull( )
+#df['sales'][ idx ] = df['net_pft'][ idx ]
+
+
+miss_mean_age_test=test.loc[test["Name"].str.contains("Miss")].Age.mean(skipna=True)
+mr_mean_age_test=test.loc[test["Name"].str.contains("Mr")].Age.mean(skipna=True)
+Master_mean_age_test=test.loc[test["Name"].str.contains("Master")].Age.mean(skipna=True)
+mrs_mean_age_test=test.loc[test["Name"].str.contains("Mrs")].Age.mean(skipna=True)
+
+a=test["Name"].str.contains("Mr") & test["Age"].isnull()
+a=mr_mean_age_test
+mr_mean_age_cols_test=np.where(test.Name.str.contains("Mr.") & test["Age"].isnull())
+for row in mr_mean_age_cols_test:
+    test.iloc[row] = test.iloc[row].fillna(mr_mean_age_test)
+b=test["Name"].str.contains("Miss") & test["Age"].isnull()
+b=miss_mean_age_test
+miss_mean_age_cols_test=np.where(test.Name.str.contains("Miss") & test["Age"].isnull())
+for row in miss_mean_age_cols_test:
+    test.iloc[row] = test.iloc[row].fillna(miss_mean_age_test)
+c=test["Name"].str.contains("Master") & test["Age"].isnull()
+c=Master_mean_age_test
+Master_mean_age_cols_test=np.where(test.Name.str.contains("Master") & test["Age"].isnull())
+for row in Master_mean_age_cols_test:
+    test.iloc[row] = test.iloc[row].fillna(Master_mean_age_test)
+d=test["Name"].str.contains("Mrs") & test["Age"].isnull()
+d=mrs_mean_age_test
+mrs_mean_age_cols_test=np.where(test.Name.str.contains("Mrs") & test["Age"].isnull())
+for row in mrs_mean_age_cols_test:
+    test.iloc[row] = test.iloc[row].fillna(mrs_mean_age_test)
+
+print(mr_mean_age_test)
+print(miss_mean_age_test)
+print(mrs_mean_age_test)       
+print(Master_mean_age_test)
+
+
+
+
+print(mr_mean_age_cols)
+
+train.head()
+
+train["Age"].isnull().sum()
+
+a=np.where(train["Age"].isnull())
+
+a
+
+train.loc[((train.Name.str.contains("Mr") |
+           train.Name.str.contains("Mrs") |
+           train.Name.str.contains("Master") |
+           train.Name.str.contains("Miss")) == False) & train.Age.isnull()]
+
+doc_row=np.where(train.loc[((train.Name.str.contains("Mr") |
+           train.Name.str.contains("Mrs") |
+           train.Name.str.contains("Master") |
+           train.Name.str.contains("Miss")) == False) & train.Age.isnull()])
+
+doc_row
+
+for row in doc_row:
+    train.iloc[row] = train.iloc[row].fillna(33.11)
+
+# for row in doc_row:
+    #X_train.iloc[row] = X_train.iloc[row].fillna(mr_mean_age_train)
+
+mr_mean_age
+
+train.isnull().sum()
+
+train.isnull().sum()
+
+test.loc[((test.Name.str.contains("Mr") |
+           test.Name.str.contains("Mrs") |
+           test.Name.str.contains("Master") |
+           test.Name.str.contains("Miss")) == False) & test.Age.isnull()]
+
+rows=np.where(test.loc[((test.Name.str.contains("Mr") |
+           test.Name.str.contains("Mrs") |
+           test.Name.str.contains("Master") |
+           test.Name.str.contains("Miss")) == False) & test.Age.isnull()])
+
+for row in rows:
+    test.iloc[row]=test.iloc[row].fillna(mrs_mean_age_test)
+
+mr_mean_age,mrs_mean_age_test
+
+test.isnull().sum()
+
+for age in train["Age"]:
+    if age<18:
+        x=1
+    else:
+            x=0
+
+x
+
+#train.to_csv("train1.csv")
+
+test.to_csv("test1.csv")
+
+train1=pd.read_csv("train1.csv")
+
+test1=pd.read_csv("test1.csv")
+
+
+train1.head()
+
+test1.head()
+
+train1.isnull().sum()
+
+test1.isnull().sum()
+
+train1.Fare.isnull().sum()
+
+test1.Fare.isnull().sum()
+
+rows=np.where(test1.Fare.isnull())
+
+test1.loc[test1.Fare.isnull()]
+
+a=test1.groupby("Pclass")
+
+a.Fare.describe()
+
+rows
+
+
+
+#doc_row=np.where(train.loc[((train.Name.str.contains("Mr") |
+#          train.Name.str.contains("Mrs") |
+#         train.Name.str.contains("Master") |
+#        train.Name.str.contains("Miss")) == False) & train.Age.isnull()])
+
+for row in rows:
+    test1.iloc[row]=test1.iloc[row].fillna(12.45)
+
+
+
+test1.Fare.isnull().sum()
+
+train1=train1.drop(["Cabin","Embarked"],axis=1)
+test1=test1.drop(["Cabin","Embarked"],axis=1)
+
+train1.head()
+
+test1.head()
+
+rows=np.where(train1.Sex=="male")
+for row in rows:
+    train1.iloc[row]=train1.iloc[row].replace({"male":0})
+rows1=np.where(train1.Sex=="female")
+for row in rows1:
+     train1.iloc[row]=train1.iloc[row].replace({"female":1})
+
+train1.head()
+
+rows=np.where(test1.Sex=="male")
+for row in rows:
+    test1.iloc[row]=test1.iloc[row].replace({"male":0})
+rows1=np.where(test1.Sex=="female")
+for row in rows1:
+     test1.iloc[row]=test1.iloc[row].replace({"female":1})
+
+test1.head()
+
+train1=train1.drop(["Name"],axis=1)
+test1=test1.drop(["Name"],axis=1)
+
+train1=train1.drop(["Ticket"],axis=1)
+test1=test1.drop(["Ticket"],axis=1)
+
+train1.head()
+
+
+test1.head()
+
+train1=train1.drop(["Unnamed: 0"],axis=1)
+
+test1=test1.drop(["Unnamed: 0"],axis=1)
+
+train1.head()
+
+from sklearn.model_selection import train_test_split
+
+train_data,test_data=train_test_split(train1,test_size=0.20,random_state=2)
+
+train_data.shape
+
+test_data.shape
+
+train_y=train_data.Survived
+
+test_y=test_data.Survived
+
+train1.groupby("Sex").describe()
+
+
+print(train1.groupby("Sex").Survived.describe())
+
+#The above code shows that more precentage of women survived as compared to men. 
+
+train1.describe(include="all")
+
+#sibsp - Number of Siblings/Spouses Aboard. parch - Number of Parents/Children Aboard. So, we will add the SibSp and
+#Parch and create a variable "Family".
+
+train_data["Family"]=train_data["SibSp"]+train_data["Parch"]
+
+test_data["Family"]=test_data["SibSp"]+test_data["Parch"]
+
+train_data.head()
+
+train_data=train_data.drop(["SibSp","Parch"],axis=1)
+test_data=test_data.drop(["SibSp","Parch"],axis=1)
+
+test_data.head()
+
+test1.describe()
+
+test1["Family"]=test1["SibSp"]+test1["Parch"]
+test1=test1.drop(["SibSp","Parch"],axis=1)
+
+
+
+test1.head()
+
+train_data.head()
+
+
+test_data.head()
+
+test_data=test_data.drop(["Survived"],axis=1)
+
+from sklearn.preprocessing import StandardScaler
+
+scaling = StandardScaler()
+scaling_list = ['Age', 'Family', 'Fare']
+
+train_data[scaling_list] = scaling.fit_transform(train_data[scaling_list])
+test_data[scaling_list] = scaling.fit_transform(test_data[scaling_list])
+test1[scaling_list] = scaling.fit_transform(test1[scaling_list])
+
+train_data.head()
+
+test_data.head()
+
+train_data.head()
+train_data=train_data.drop(["Survived"],axis=1)
+
+gbm_params={"n_estimators":[50,100,200,500],"learning_rate":[0.001,0.01,0.05,0.1,0.4,0.8,1],"max_depth":[1,2,3,4,5,6],
+            "subsample":[0.5,0.8,1],"max_features":[0.1,0.3,0.5,0.8,1]}
+
+from sklearn.ensemble import GradientBoostingClassifier
+
+gbclf=GradientBoostingClassifier()
+random_search=RandomizedSearchCV(gbclf,scoring="roc_auc",param_distributions=gbm_params,cv=10,n_iter=10,n_jobs=-1,verbose=True)
+
+random_search.fit(train_data,train_y)
+
+random_search.best_estimator_
+
+gbclf1=GradientBoostingClassifier(learning_rate=0.05, max_depth=4, max_features=0.8,n_estimators=50, subsample=1)
+gbclf1.fit(train_data,train_y)
+
+
+
+y_pred=gbclf1.predict(test_data)
+
+from sklearn.metrics import accuracy_score
+accuracy_score(test_y,y_pred)
+
+import sklearn
+sklearn.metrics.SCORERS.keys()
+
+predictions=gbclf1.predict(test1)
+#errors=mean_squared_error(test_y,y_pred)
+
+len(predictions)
+
+submission = pd.DataFrame({
+        "PassengerId": test1["PassengerId"],
+        "Survived": predictions})
+
+submission.to_csv("Gagandeep_Titanic_2nd_attempt.csv")
+
+test_data.head()
+
+rf.fit(train_data,train_y)
+
+y_pred=rf.predict(test_data)
+
+errors=mean_absolute_error(test_y,y_pred)
+
+errors
+
+from sklearn import metrics
+a=metrics.accuracy_score(test_y,y_pred)
+
+a
+
+predictions=rf.predict(test1)
+
+len(predictions)
+
+prediction=cbind(test1.PassengerId,predictions)
+
+prediction=list(zip(test1.PassengerId,predictions))
+
+prediction.shape
+
+test1.shape,y_pred.shape
+
+submission = pd.DataFrame({
+        "PassengerId": test1["PassengerId"],
+        "Survived": predictions})
+
+submission.to_csv("Gagandeep_Titanic_1stattempt.csv")
+
+
+
